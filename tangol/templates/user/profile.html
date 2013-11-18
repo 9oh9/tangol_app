@@ -1,0 +1,14 @@
+<html>
+	<head>
+		<title>User Profile</title>
+	</head>
+	<body>
+		<a href="/accounts/logout/">Logout</a>
+		<a href="/user/settings/">Settings</a>
+		<h1>This is your profile!!</h1>
+		<img src= "/media/{{ profile.pic }} "  alt="profile picture" />
+		<h3> {{ user.username }} </h3>
+		<h3> {{ profile.city }} </h3>
+
+	</body>
+</html>

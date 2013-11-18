@@ -1,4 +1,5 @@
 # Django settings for tangol project.
+import os.path
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
@@ -9,14 +10,18 @@ ADMINS = (
 
 MANAGERS = ADMINS
 
+PROJECT_ROOT = os.path.abspath(os.path.join(os.path.dirname(__name__), os.pardir))
+
+AUTHENTICATION_BACKENDS = ('user_admin.tangol_auth.tangy_auth',)
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': '',                      # Or path to database file if using sqlite3.
+        'ENGINE': 'django.db.backends.mysql', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
+        'NAME': 'tangol-dev',                      # Or path to database file if using sqlite3.
         # The following settings are not used with sqlite3:
-        'USER': '',
-        'PASSWORD': '',
-        'HOST': '',                      # Empty for localhost through domain sockets or '127.0.0.1' for localhost through TCP.
+        'USER': 'tangol-dev',
+        'PASSWORD': 'chrisCross2!9!',
+        'HOST': '54.214.44.116',                      # Empty for localhost through domain sockets or '127.0.0.1' for localhost through TCP.
         'PORT': '',                      # Set to empty string for default.
     }
 }
@@ -50,18 +55,21 @@ USE_TZ = True
 
 # Absolute filesystem path to the directory that will hold user-uploaded files.
 # Example: "/var/www/example.com/media/"
-MEDIA_ROOT = ''
+MEDIA_ROOT = os.path.join(PROJECT_ROOT, 'static/media')
 
 # URL that handles the media served from MEDIA_ROOT. Make sure to use a
 # trailing slash.
 # Examples: "http://example.com/media/", "http://media.example.com/"
-MEDIA_URL = ''
+MEDIA_URL = '/media/'
+
+#change user model new email based user
+AUTH_USER_MODEL = 'user_admin.tangol_user'
 
 # Absolute path to the directory static files should be collected to.
 # Don't put anything in this directory yourself; store your static files
 # in apps' "static/" subdirectories and in STATICFILES_DIRS.
 # Example: "/var/www/example.com/static/"
-STATIC_ROOT = ''
+STATIC_ROOT = os.path.join(PROJECT_ROOT, 'static')
 
 # URL prefix for static files.
 # Example: "http://example.com/static/", "http://static.example.com/"
@@ -85,6 +93,7 @@ STATICFILES_FINDERS = (
 # Make this unique, and don't share it with anybody.
 SECRET_KEY = '%8wix)gdfn9+-52=h-8wk62%hmx#enbwy*@6!au_vjo022=^5q'
 
+AUTH_PROFILE_MODULE = 'user_admin.Profile'
 # List of callables that know how to import templates from various sources.
 TEMPLATE_LOADERS = (
     'django.template.loaders.filesystem.Loader',
@@ -108,14 +117,15 @@ ROOT_URLCONF = 'tangol.urls'
 WSGI_APPLICATION = 'tangol.wsgi.application'
 
 TEMPLATE_DIRS = (
+    os.path.join(os.path.dirname(__file__), 'templates'),
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
 )
 
 INSTALLED_APPS = (
-    'django.contrib.auth',
     'django.contrib.contenttypes',
+    'django.contrib.auth',
     'django.contrib.sessions',
     'django.contrib.sites',
     'django.contrib.messages',
@@ -124,6 +134,7 @@ INSTALLED_APPS = (
     # 'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
+    'user_admin',
 )
 
 # A sample logging configuration. The only tangible logging

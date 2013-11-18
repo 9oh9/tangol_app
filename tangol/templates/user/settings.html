@@ -1,0 +1,14 @@
+<html>
+	<head></head>
+	<body>
+		<a href="/accounts/profile/">me</a>
+		<h1>Settings</h1>
+				{% if span %}
+					<span> {{ span }} </span>
+				{% endif %}
+		<form action="" method="post">{% csrf_token %}
+			{{form.as_p}}
+			<input type="submit" value="save" />
+		</form>
+	</body>
+</html>
