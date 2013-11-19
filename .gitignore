@@ -4,4 +4,3 @@
 local_settings.py
 .DS_Store
 test.py
-wsgi.py
